@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Button simulator (my game).sln"
+    "dotnet.defaultSolution": "Button-simulator-my-game-.sln"
 }
