@@ -24,6 +24,11 @@ public class PlayerMovement : MonoBehaviour
      public LayerMask whatIsGround;
      bool grounded;
 
+    //  [Header("Stats")]
+    //  public float cash = 0;
+    //  public float multi = 1;
+
+
      public Transform orientation;
 
      float horizontalInput;
@@ -52,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
          }
          else 
          {
-            rb.drag = 0;
+            rb.drag = 2;
          }
          
          
@@ -103,4 +108,12 @@ public class PlayerMovement : MonoBehaviour
      {
          readyToJump = true;
      }
+    //  public void StatGain()
+    //  {
+    //     if(multi>0)
+    //     {
+    //         cash += 1*multi;
+    //         print(cash);
+    //     }
+    //  }
 }

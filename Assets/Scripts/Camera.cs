@@ -21,6 +21,8 @@ public class Camera : MonoBehaviour
     float rotAverageY = 0F;
     public float frameCounter = 20;
     Quaternion originalRotation;
+    internal static object current;
+
     void Update ()
     {
         if (axes == RotationAxes.MouseXAndY)
