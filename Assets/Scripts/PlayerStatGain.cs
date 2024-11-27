@@ -8,11 +8,15 @@ public class PlayerStatGain : MonoBehaviour
     [Header("Stats")]
      public float cash = 0;
      public float multi = 1;
-     private Collider collision;
+     [Header("Shooting myself in the head")]
+     public new GameObject gameObject;
+    //  private Collider collision;
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameObject.GetComponent<GameObject>();
+        cash = PlayerPrefs.GetFloat("cash", 0);
+        multi = PlayerPrefs.GetFloat("multi",1);
     }
 
     // Update is called once per frame
@@ -20,13 +24,12 @@ public class PlayerStatGain : MonoBehaviour
     {
         StatGain();
     }
-    void FixedUpdate(){
-        OnCollisionEnter3D();
-    }
-    void OnCollisionEnter3D()
+    // void FixedUpdate(){
+    // }
+    void OnMouseDown()
     {
         Debug.Log("Collision");
-        if(collision.gameObject.CompareTag("MultiButton1")){
+        if(gameObject.CompareTag("MultiButton1")){
             Debug.Log("Collided with button");
             if(cash>=100){
                 cash-=100;
@@ -46,7 +49,21 @@ public class PlayerStatGain : MonoBehaviour
         if(multi>0)
         {
             cash += 1*multi*Time.deltaTime;
-            
+
         }
      }
+
+    private void OnApplicationPause(bool pauseStatus){
+        if(pauseStatus){
+            Save();
+        }
+    }
+    private void OnApplicationQuit(){
+        Save();
+    }
+    private void Save(){
+        PlayerPrefs.SetFloat("multi", multi);
+        PlayerPrefs.SetFloat("cash", cash);
+        PlayerPrefs.Save();
+    }
 }
