@@ -18,7 +18,7 @@ public class Button : MonoBehaviour
     {
         
     }
-    private void OnCollisionEnter3D(Collider collision)
+    private void OnTriggerEnter3D(Collider collision)
     {
         Debug.Log("Collision detected");
          if(collision.gameObject.CompareTag("Player") && player.cash>=100)

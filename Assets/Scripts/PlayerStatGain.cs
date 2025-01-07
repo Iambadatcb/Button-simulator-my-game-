@@ -14,22 +14,17 @@ public class PlayerStatGain : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("turns on");
         gameObject.GetComponent<GameObject>();
         cash = PlayerPrefs.GetFloat("cash", 0);
         multi = PlayerPrefs.GetFloat("multi",1);
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        StatGain();
-    }
-    // void FixedUpdate(){
-    // }
-    void OnMouseDown()
+    void OnCollisionEnter3D(Collider collision)
     {
         Debug.Log("Collision");
-        if(gameObject.CompareTag("MultiButton1")){
+        if(collision.gameObject.CompareTag("MultiButton1")){
             Debug.Log("Collided with button");
             if(cash>=100){
                 cash-=100;
@@ -44,6 +39,13 @@ public class PlayerStatGain : MonoBehaviour
             }
         }
     }
+    void Update()
+    {
+        
+        StatGain();
+    }
+    // void FixedUpdate(){
+    // }
     public void StatGain()
      {
         if(multi>0)
