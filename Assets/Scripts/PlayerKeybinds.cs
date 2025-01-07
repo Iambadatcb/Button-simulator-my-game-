@@ -30,12 +30,12 @@ public class PlayerKeybinds : MonoBehaviour
             var test = playercam.GetComponent<PlayerCam>();
             test.enabled = false;
             UnityEngine.Cursor.lockState = CursorLockMode.None;
+            var movement = playerMovement.GetComponent<PlayerMovement>();
+            movement.enabled = false;
             settings.SetActive(true);
             canvas.SetActive(true);
             playercam.transform.position = new Vector3(settings.transform.position.x,settings.transform.position.y,settings.transform.position.z-1);
             playercam.transform.rotation = settings.transform.rotation;
-            var movement = playerMovement.GetComponent<PlayerMovement>();
-            movement.enabled = false;
             button.SetActive(false);
             Menu = true;
         }
