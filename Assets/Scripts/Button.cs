@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Button : MonoBehaviour
@@ -9,7 +10,10 @@ public class Button : MonoBehaviour
     private PlayerStatGain player;
     public TextMesh cash;
     public TextMesh multi;
+    private GameObject gameObjectB;
     
+
+
     // Start is called before the first frame update
     public void Start()
     {
@@ -20,11 +24,12 @@ public class Button : MonoBehaviour
     void Update()
     {
         
+
     }
     private void OnTriggerEnter3D(Collider collision)
     {
         Debug.Log("Collision detected");
-         if(collision.gameObject.CompareTag("Player") && player.cash>=Convert.ToInt32(cash.text))
+         if(collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Colllided with player.");
             if(player.cash>=Convert.ToInt32(cash.text)){

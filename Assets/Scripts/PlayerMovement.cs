@@ -22,7 +22,9 @@ public class PlayerMovement : MonoBehaviour
      [Header("Ground Check")]
      public float playerHeight;
      public LayerMask whatIsGround;
+    public LayerMask multiButton;
      bool grounded;
+    bool grounded2;
 
     //  [Header("Stats")]
     //  public float cash = 0;
@@ -48,7 +50,8 @@ public class PlayerMovement : MonoBehaviour
      void Update()
      {
          grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * (0.5f + 0.2f), whatIsGround);
-         MyInput();
+         grounded2 = Physics.Raycast(transform.position, Vector3.down, playerHeight * (0.5f + 0.2f), multiButton);
+        MyInput();
          SpeedControl();
          
          if(grounded)
@@ -59,6 +62,14 @@ public class PlayerMovement : MonoBehaviour
          {
             rb.drag = 2;
          }
+        if (grounded == false && grounded2 == true)
+        {
+            rb.drag = groundDrag;
+        }
+        else
+        {
+            rb.drag = 2;
+        }
          
          
      }
@@ -70,13 +81,20 @@ public class PlayerMovement : MonoBehaviour
          horizontalInput = Input.GetAxisRaw("Horizontal");
          verticalInput = Input.GetAxisRaw("Vertical");
          
-         if(Input.GetKey(jumpKey) && readyToJump && grounded){
+         if(Input.GetKey(jumpKey) && readyToJump && grounded)
+        {
             readyToJump = false;
 
             Jump();
 
             Invoke(nameof(ResetJump), jumpCooldown);
          }
+         else if(Input.GetKey(jumpKey) &&readyToJump && grounded2)
+        {
+            readyToJump=false;
+            Jump();
+            Invoke(nameof(ResetJump), jumpCooldown);
+        }
      }
 
      private void MovePlayer()
@@ -84,10 +102,14 @@ public class PlayerMovement : MonoBehaviour
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
          if(grounded)
-        rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force); 
+        rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+         
+         else if(!grounded&&grounded2) rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
 
         else if(!grounded)
                  rb.AddForce(moveDirection.normalized * moveSpeed * 10f* airMultiplier, ForceMode.Force); 
+         
+         
 
      }
      private void SpeedControl()

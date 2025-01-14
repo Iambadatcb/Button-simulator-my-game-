@@ -10,6 +10,7 @@ public class PlayerKeybinds : MonoBehaviour
     public GameObject canvas;
     public GameObject player;
     public GameObject button;
+    
     public GameObject playerMovement;
     
     private bool Menu = false;
@@ -17,6 +18,7 @@ public class PlayerKeybinds : MonoBehaviour
     
     void Start()
     {
+        
         settings.SetActive(false);
         canvas.SetActive(false);
         
@@ -36,7 +38,7 @@ public class PlayerKeybinds : MonoBehaviour
             canvas.SetActive(true);
             playercam.transform.position = new Vector3(settings.transform.position.x,settings.transform.position.y,settings.transform.position.z-1);
             playercam.transform.rotation = settings.transform.rotation;
-            button.SetActive(false);
+            
             Menu = true;
         }
         else if(Input.GetKeyDown(KeyCode.Escape)&& Menu == true)
@@ -50,7 +52,7 @@ public class PlayerKeybinds : MonoBehaviour
             playercam.transform.rotation = player.transform.rotation;
             var movement = playerMovement.GetComponent<PlayerMovement>();
             movement.enabled = true;
-            button.SetActive(true);
+            
             Menu = false;
         }
     }

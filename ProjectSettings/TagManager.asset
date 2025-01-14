@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - MultiButton1
+  - RebirthButton1
   layers:
   - Default
   - TransparentFX
@@ -12,7 +13,7 @@ TagManager:
   - whatIsGround
   - Water
   - UI
-  - 
+  - multiButton
   - 
   - 
   - 
