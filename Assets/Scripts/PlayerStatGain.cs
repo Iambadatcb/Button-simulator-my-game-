@@ -30,6 +30,7 @@ public class PlayerStatGain : MonoBehaviour
         gameObject.GetComponent<GameObject>();
         cash = PlayerPrefs.GetFloat("cash", 0);
         multi = PlayerPrefs.GetFloat("multi",1);
+        reb = PlayerPrefs.GetFloat("rebirth", 0);
         
     }
 
@@ -44,10 +45,20 @@ public class PlayerStatGain : MonoBehaviour
 
             if (cash >= Convert.ToInt32(Addition.cash.text))
             {   
+                if(reb>0)
+                {
+                cash = cash - Convert.ToInt32(Addition.cash.text);
+                multi = multi + Convert.ToInt32(Addition.multi.text)*(2*reb);
+                cashText.text = cash.ToString();
+                prizeText.text = multi.ToString();
+                }
+                else if(reb<=0)
+                {
                 cash = cash - Convert.ToInt32(Addition.cash.text);
                 multi = multi + Convert.ToInt32(Addition.multi.text);
                 cashText.text = cash.ToString();
                 prizeText.text = multi.ToString();
+                }
                 StatGain();
                 Debug.Log("Cash decreased. New cash: "+cash);
                 Debug.Log("Multi increased. New multi: "+multi);
@@ -60,10 +71,10 @@ public class PlayerStatGain : MonoBehaviour
         else if (collision.gameObject.CompareTag("RebirthButton1"))
         {
             Debug.Log("Collided with button");
-            if (cash >= Convert.ToInt32(Addition.cash.text))
+            if (multi >= Convert.ToInt32(Addition.cash.text))
             {
-                multi = cash - Convert.ToInt32(Addition.cash.text);
-                reb = multi + Convert.ToInt32(Addition.multi.text);
+                multi = multi - Convert.ToInt32(Addition.cash.text);
+                reb = reb + Convert.ToInt32(Addition.multi.text);
                 cashText.text = cash.ToString();
                 prizeText.text = multi.ToString();
                 StatGain();
@@ -110,6 +121,7 @@ public class PlayerStatGain : MonoBehaviour
     private void Save(){
         PlayerPrefs.SetFloat("multi", multi);
         PlayerPrefs.SetFloat("cash", cash);
+        PlayerPrefs.SetFloat("rebirth", reb);
         PlayerPrefs.Save();
     }
 }
