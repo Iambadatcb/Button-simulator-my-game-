@@ -68,7 +68,7 @@ public class PlayerStatGain : MonoBehaviour
                 Debug.Log("Not enough cash to increase multiplier");
             }
         }
-        else if (collision.gameObject.CompareTag("RebirthButton1"))
+        if (collision.gameObject.CompareTag("RebirthButton1"))
         {
             Debug.Log("Collided with button");
             if (multi >= Convert.ToInt32(Addition.cash.text))
@@ -104,10 +104,7 @@ public class PlayerStatGain : MonoBehaviour
             cash += 1*multi*Time.deltaTime;
 
         }
-        else if (reb > 0)
-        {
-            multi += 1 * reb * Time.deltaTime;
-        }
+        
      }
 
     private void OnApplicationPause(bool pauseStatus){
